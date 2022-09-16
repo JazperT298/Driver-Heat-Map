@@ -1,4 +1,4 @@
-// ignore_for_file: must_be_immutable, use_key_in_widget_constructors, prefer_const_constructors, prefer_const_constructors_in_immutables, prefer_interpolation_to_compose_strings, prefer_const_literals_to_create_immutables, import_of_legacy_library_into_null_safe, avoid_unnecessary_containers, deprecated_member_use
+// ignore_for_file: must_be_immutable, use_key_in_widget_constructors, prefer_const_constructors, prefer_const_constructors_in_immutables, prefer_interpolation_to_compose_strings, prefer_const_literals_to_create_immutables, import_of_legacy_library_into_null_safe, avoid_unnecessary_containers, deprecated_member_use, avoid_print
 
 import 'package:driver_heat_map/config_map.dart';
 import 'package:driver_heat_map/main.dart';
@@ -16,6 +16,7 @@ class NotificationDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print('Information DIALOG 1');
     return Dialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
       backgroundColor: Colors.transparent,
@@ -32,7 +33,7 @@ class NotificationDialog extends StatelessWidget {
           children: [
             SizedBox(height: 10.0),
             Image.asset(
-              "assets/images/uberx.png",
+              "assets/images/taxi.png",
               width: 150.0,
             ),
             SizedBox(
@@ -127,6 +128,7 @@ class NotificationDialog extends StatelessWidget {
                     onPressed: () {
                       assetsAudioPlayer.stop();
                       checkAvailabilityOfRide(context);
+                      Navigator.pop(context);
                     },
                     color: Colors.green,
                     textColor: Colors.white,

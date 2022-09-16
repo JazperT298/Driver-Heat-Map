@@ -17,14 +17,19 @@ class PushNotificationService {
 
   Future initialize(context) async {
     // workaround for onLaunch: When the app is completely closed (not in the background) and opened directly from the push notification
-    FirebaseMessaging.instance.getInitialMessage().then((message) => retrieveRideRequestInfo(getRideRequestId(message!.data), context));
+    firebaseMessaging!.getInitialMessage().then((message) {
+      print('Information 1');
+      retrieveRideRequestInfo(getRideRequestId(message!.data), context);
+    });
 
     // onMessage: When the app is open and it receives a push notification
     FirebaseMessaging.onMessage.listen((message) {
+      print('Information 2');
       retrieveRideRequestInfo(getRideRequestId(message.data), context);
     });
     // replacement for onResume: When the app is in the background and opened directly from the push notification.
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+      print('Information 3');
       retrieveRideRequestInfo(getRideRequestId(message.data), context);
     });
     // firebaseMessaging!.configure(
@@ -54,9 +59,11 @@ class PushNotificationService {
   String getRideRequestId(Map<String, dynamic> message) {
     String rideRequestId = "";
     if (Platform.isAndroid) {
-      rideRequestId = message['data']['ride_request_id'];
+      rideRequestId = message['ride_request_id'];
+      print("This is rideRequestId 1 :: $rideRequestId");
     } else {
       rideRequestId = message['ride_request_id'];
+      print("This is rideRequestId 2 :: $rideRequestId");
     }
 
     return rideRequestId;
@@ -65,18 +72,26 @@ class PushNotificationService {
   void retrieveRideRequestInfo(String rideRequestId, BuildContext context) {
     newRequestsRef.child(rideRequestId).once().then((DataSnapshot dataSnapShot) {
       if (dataSnapShot.value != null) {
+        print('Information dd');
         assetsAudioPlayer.open(Audio("assets/sounds/alert.mp3"));
         assetsAudioPlayer.play();
-
+        print('Information as');
         double pickUpLocationLat = double.parse(dataSnapShot.value['pickup']['latitude'].toString());
-        double pickUpLocationLng = double.parse(dataSnapShot.value['pickup']['longitude'].toString());
+        print('Information $pickUpLocationLat');
+        double pickUpLocationLng = double.parse(dataSnapShot.value['pickup']['longtitude'].toString());
+        print('Information $pickUpLocationLng');
         String pickUpAddress = dataSnapShot.value['pickup_address'].toString();
+        print('Information $pickUpAddress');
 
         double dropOffLocationLat = double.parse(dataSnapShot.value['dropoff']['latitude'].toString());
-        double dropOffLocationLng = double.parse(dataSnapShot.value['dropoff']['longitude'].toString());
+        print('Information $dropOffLocationLat');
+        double dropOffLocationLng = double.parse(dataSnapShot.value['dropoff']['longtitude'].toString());
+        print('Information $dropOffLocationLng');
         String dropOffAddress = dataSnapShot.value['dropoff_address'].toString();
+        print('Information $dropOffAddress');
 
         String paymentMethod = dataSnapShot.value['payment_method'].toString();
+        print('Information as');
 
         String rider_name = dataSnapShot.value["rider_name"];
         String rider_phone = dataSnapShot.value["rider_phone"];
@@ -91,9 +106,7 @@ class PushNotificationService {
         rideDetails.rider_name = rider_name;
         rideDetails.rider_phone = rider_phone;
 
-        print("Information :: ");
-        print(rideDetails.pickup_address);
-        print(rideDetails.dropoff_address);
+        print("Information :: ${rideDetails.pickup_address}, ${rideDetails.dropoff_address}");
 
         showDialog(
           context: context,
@@ -102,6 +115,7 @@ class PushNotificationService {
             rideDetails: rideDetails,
           ),
         );
+        print('Information DIALOG');
       }
     });
   }
