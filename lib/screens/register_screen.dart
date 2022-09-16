@@ -30,7 +30,7 @@ class RegisterScreen extends StatelessWidget {
                 height: 20.0,
               ),
               Image(
-                image: AssetImage("images/logo.png"),
+                image: AssetImage("assets/images/logo.png"),
                 width: 390.0,
                 height: 250.0,
                 alignment: Alignment.center,

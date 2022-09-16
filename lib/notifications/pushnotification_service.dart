@@ -65,7 +65,7 @@ class PushNotificationService {
   void retrieveRideRequestInfo(String rideRequestId, BuildContext context) {
     newRequestsRef.child(rideRequestId).once().then((DataSnapshot dataSnapShot) {
       if (dataSnapShot.value != null) {
-        assetsAudioPlayer.open(Audio("sounds/alert.mp3"));
+        assetsAudioPlayer.open(Audio("assets/sounds/alert.mp3"));
         assetsAudioPlayer.play();
 
         double pickUpLocationLat = double.parse(dataSnapShot.value['pickup']['latitude'].toString());

@@ -1,5 +1,5 @@
-// ignore_for_file: import_of_legacy_library_into_null_safe, prefer_const_constructors, use_key_in_widget_constructors
-
+// ignore_for_file: import_of_legacy_library_into_null_safe, prefer_const_constructors, use_key_in_widget_constructors, invalid_language_version_override
+// @dart=2.9
 import 'package:driver_heat_map/config_map.dart';
 import 'package:driver_heat_map/datahandler/app_data.dart';
 import 'package:driver_heat_map/screens/carinfo_screen.dart';
@@ -24,7 +24,7 @@ void main() async {
 DatabaseReference usersRef = FirebaseDatabase.instance.reference().child("users");
 DatabaseReference driversRef = FirebaseDatabase.instance.reference().child("drivers");
 DatabaseReference newRequestsRef = FirebaseDatabase.instance.reference().child("Ride Requests");
-DatabaseReference rideRequestRef = FirebaseDatabase.instance.reference().child("drivers").child(currentfirebaseUser!.uid).child("newRide");
+DatabaseReference rideRequestRef = FirebaseDatabase.instance.reference().child("drivers").child(currentfirebaseUser.uid).child("newRide");
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.

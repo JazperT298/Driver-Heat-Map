@@ -1,4 +1,4 @@
-// ignore_for_file: must_be_immutable, use_key_in_widget_constructors, prefer_const_constructors, prefer_const_constructors_in_immutables, prefer_interpolation_to_compose_strings, prefer_const_literals_to_create_immutables, unused_field, prefer_final_fields, prefer_collection_literals, import_of_legacy_library_into_null_safe, unnecessary_new, avoid_unnecessary_containers, deprecated_member_use, use_build_context_synchronously, sized_box_for_whitespace, sort_child_properties_last
+// ignore_for_file: must_be_immutable, use_key_in_widget_constructors, prefer_const_constructors, prefer_const_constructors_in_immutables, prefer_interpolation_to_compose_strings, prefer_const_literals_to_create_immutables, unused_field, prefer_final_fields, prefer_collection_literals, import_of_legacy_library_into_null_safe, unnecessary_new, avoid_unnecessary_containers, deprecated_member_use, use_build_context_synchronously, sized_box_for_whitespace, sort_child_properties_last, library_private_types_in_public_api
 
 import 'package:driver_heat_map/config_map.dart';
 import 'package:driver_heat_map/main.dart';
@@ -33,7 +33,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 height: 35.0,
               ),
               Image(
-                image: AssetImage("images/logo.png"),
+                image: AssetImage(
+                  "assets/images/logo.png",
+                ),
                 width: 390.0,
                 height: 250.0,
                 alignment: Alignment.center,

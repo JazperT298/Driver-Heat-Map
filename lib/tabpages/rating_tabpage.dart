@@ -2,7 +2,7 @@
 
 import 'package:driver_heat_map/config_map.dart';
 import 'package:flutter/material.dart';
-import 'package:smooth_star_rating/smooth_star_rating.dart';
+import 'package:smooth_star_rating_nsafe/smooth_star_rating.dart';
 
 class RatingTabPage extends StatefulWidget {
   @override
@@ -52,7 +52,6 @@ class _RatingTabPageState extends State<RatingTabPage> {
                 allowHalfRating: true,
                 starCount: 5,
                 size: 45,
-                isReadOnly: true,
               ),
               SizedBox(
                 height: 14.0,

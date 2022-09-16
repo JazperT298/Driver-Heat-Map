@@ -59,7 +59,7 @@ class _NewRideScreenState extends State<NewRideScreen> {
   void createIconMarker() {
     if (animatingMarkerIcon == null) {
       ImageConfiguration imageConfiguration = createLocalImageConfiguration(context, size: Size(2, 2));
-      BitmapDescriptor.fromAssetImage(imageConfiguration, "images/car_android.png").then((value) {
+      BitmapDescriptor.fromAssetImage(imageConfiguration, "assets/images/car_android.png").then((value) {
         animatingMarkerIcon = value;
       });
     }
@@ -182,7 +182,7 @@ class _NewRideScreenState extends State<NewRideScreen> {
                     Row(
                       children: [
                         Image.asset(
-                          "images/pickicon.png",
+                          "assets/images/pickicon.png",
                           height: 16.0,
                           width: 16.0,
                         ),
@@ -206,7 +206,7 @@ class _NewRideScreenState extends State<NewRideScreen> {
                     Row(
                       children: [
                         Image.asset(
-                          "images/desticon.png",
+                          "assets/images/desticon.png",
                           height: 16.0,
                           width: 16.0,
                         ),
@@ -315,7 +315,7 @@ class _NewRideScreenState extends State<NewRideScreen> {
     print(details!.encodedPoints);
 
     PolylinePoints polylinePoints = PolylinePoints();
-    List<PointLatLng> decodedPolyLinePointsResult = polylinePoints.decodePolyline(details.encodedPoints);
+    List<PointLatLng> decodedPolyLinePointsResult = polylinePoints.decodePolyline(details.encodedPoints!);
 
     polylineCorOrdinates.clear();
 

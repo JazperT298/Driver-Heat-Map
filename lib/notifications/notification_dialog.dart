@@ -32,7 +32,7 @@ class NotificationDialog extends StatelessWidget {
           children: [
             SizedBox(height: 10.0),
             Image.asset(
-              "images/uberx.png",
+              "assets/images/uberx.png",
               width: 150.0,
             ),
             SizedBox(
@@ -54,7 +54,7 @@ class NotificationDialog extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Image.asset(
-                        "images/pickicon.png",
+                        "assets/images/pickicon.png",
                         height: 16.0,
                         width: 16.0,
                       ),
@@ -75,7 +75,7 @@ class NotificationDialog extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Image.asset(
-                        "images/desticon.png",
+                        "assets/images/desticon.png",
                         height: 16.0,
                         width: 16.0,
                       ),

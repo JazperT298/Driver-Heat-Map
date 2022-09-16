@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, deprecated_member_use, sort_child_properties_last, unnecessary_new
+// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, deprecated_member_use, sort_child_properties_last, unnecessary_new, import_of_legacy_library_into_null_safe
 
 import 'package:driver_heat_map/config_map.dart';
 import 'package:driver_heat_map/main.dart';
@@ -35,7 +35,7 @@ class _CarInfoScreenState extends State<CarInfoScreen> {
                 height: 22.0,
               ),
               Image.asset(
-                "images/logo.png",
+                "assets/images/logo.png",
                 width: 390.0,
                 height: 250.0,
               ),

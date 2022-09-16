@@ -39,7 +39,7 @@ class EarningsTabPage extends StatelessWidget {
             child: Row(
               children: [
                 Image.asset(
-                  'images/uberx.png',
+                  'assets/images/uberx.png',
                   width: 70,
                 ),
                 SizedBox(
