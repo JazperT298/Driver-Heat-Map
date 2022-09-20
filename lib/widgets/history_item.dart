@@ -40,7 +40,7 @@ class HistoryItem extends StatelessWidget {
                       width: 5,
                     ),
                     Text(
-                      '\$${history!.fares}',
+                      '₱${history!.fares}',
                       style: TextStyle(fontFamily: 'Brand Bold', fontSize: 16, color: Colors.black87),
                     ),
                   ],
@@ -70,10 +70,10 @@ class HistoryItem extends StatelessWidget {
               SizedBox(
                 height: 15,
               ),
-              Text(
-                AssistantServices.formatTripDate(history!.createdAt!),
-                style: TextStyle(color: Colors.grey),
-              ),
+              // Text(
+              //   AssistantServices.formatTripDate(history!.createdAt!),
+              //   style: TextStyle(color: Colors.grey),
+              // ),
             ],
           ),
         ],

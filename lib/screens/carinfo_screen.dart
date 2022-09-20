@@ -21,7 +21,7 @@ class _CarInfoScreenState extends State<CarInfoScreen> {
 
   TextEditingController carColorTextEditingController = TextEditingController();
 
-  List<String> carTypesList = ['uber-x', 'uber-go', 'bike'];
+  List<String> carTypesList = ['Taxi', 'Motorela', 'Motorcycle'];
 
   String? selectedCarType;
   @override
@@ -32,10 +32,10 @@ class _CarInfoScreenState extends State<CarInfoScreen> {
           child: Column(
             children: [
               SizedBox(
-                height: 22.0,
+                height: 40.0,
               ),
               Image.asset(
-                "assets/images/logo.png",
+                "assets/images/playstore.png",
                 width: 390.0,
                 height: 250.0,
               ),
@@ -47,8 +47,8 @@ class _CarInfoScreenState extends State<CarInfoScreen> {
                       height: 12.0,
                     ),
                     Text(
-                      "Enter Car Details",
-                      style: TextStyle(fontFamily: "Brand Bold", fontSize: 24.0),
+                      "Enter Vehicle Details",
+                      style: TextStyle(fontFamily: "Brand Bold", fontSize: 24.0, fontWeight: FontWeight.bold),
                     ),
                     SizedBox(
                       height: 26.0,
@@ -56,10 +56,10 @@ class _CarInfoScreenState extends State<CarInfoScreen> {
                     TextField(
                       controller: carModelTextEditingController,
                       decoration: InputDecoration(
-                        labelText: "Car Model",
+                        labelText: "Vehicle Model",
                         hintStyle: TextStyle(color: Colors.grey, fontSize: 10.0),
                       ),
-                      style: TextStyle(fontSize: 15.0),
+                      style: TextStyle(fontSize: 16.0),
                     ),
                     SizedBox(
                       height: 10.0,
@@ -67,10 +67,10 @@ class _CarInfoScreenState extends State<CarInfoScreen> {
                     TextField(
                       controller: carNumberTextEditingController,
                       decoration: InputDecoration(
-                        labelText: "Car Number",
+                        labelText: "Vehicle Number",
                         hintStyle: TextStyle(color: Colors.grey, fontSize: 10.0),
                       ),
-                      style: TextStyle(fontSize: 15.0),
+                      style: TextStyle(fontSize: 16.0),
                     ),
                     SizedBox(
                       height: 10.0,
@@ -78,17 +78,17 @@ class _CarInfoScreenState extends State<CarInfoScreen> {
                     TextField(
                       controller: carColorTextEditingController,
                       decoration: InputDecoration(
-                        labelText: "Car Color",
+                        labelText: "Vehicle Color",
                         hintStyle: TextStyle(color: Colors.grey, fontSize: 10.0),
                       ),
-                      style: TextStyle(fontSize: 15.0),
+                      style: TextStyle(fontSize: 16.0),
                     ),
                     SizedBox(
                       height: 26.0,
                     ),
                     DropdownButton(
                       iconSize: 40,
-                      hint: Text('Please choose Car Type'),
+                      hint: Text('Please choose Vehicle Type'),
                       value: selectedCarType,
                       onChanged: (newValue) {
                         setState(() {
@@ -111,18 +111,18 @@ class _CarInfoScreenState extends State<CarInfoScreen> {
                       child: RaisedButton(
                         onPressed: () {
                           if (carModelTextEditingController.text.isEmpty) {
-                            displayToastMessage("please write Car Model.", context);
+                            displayToastMessage("please write Vehicle Model.", context);
                           } else if (carNumberTextEditingController.text.isEmpty) {
-                            displayToastMessage("please write Car Number.", context);
+                            displayToastMessage("please write Vehicle Number.", context);
                           } else if (carColorTextEditingController.text.isEmpty) {
-                            displayToastMessage("please write Car Color.", context);
+                            displayToastMessage("please write Vehicle Color.", context);
                           } else if (selectedCarType == null) {
-                            displayToastMessage("please choose Car Type.", context);
+                            displayToastMessage("please choose Vehicle Type.", context);
                           } else {
                             saveDriverCarInfo(context);
                           }
                         },
-                        color: Colors.black54,
+                        color: Colors.green,
                         child: Padding(
                           padding: const EdgeInsets.all(17.0),
                           child: Row(

@@ -22,7 +22,7 @@ class EarningsTabPage extends StatelessWidget {
                   style: TextStyle(color: Colors.white),
                 ),
                 Text(
-                  "\$${Provider.of<AppData>(context, listen: false).earnings}",
+                  "₱${Provider.of<AppData>(context, listen: false).earnings}",
                   style: TextStyle(color: Colors.white, fontSize: 50, fontFamily: 'Brand Bold'),
                 )
               ],
@@ -39,7 +39,7 @@ class EarningsTabPage extends StatelessWidget {
             child: Row(
               children: [
                 Image.asset(
-                  'assets/images/uberx.png',
+                  'assets/images/taxi.png',
                   width: 70,
                 ),
                 SizedBox(

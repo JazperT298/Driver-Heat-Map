@@ -9,13 +9,23 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-class RegisterScreen extends StatelessWidget {
+class RegisterScreen extends StatefulWidget {
   static const String idScreen = "register";
 
+  @override
+  State<RegisterScreen> createState() => _RegisterScreenState();
+}
+
+class _RegisterScreenState extends State<RegisterScreen> {
   TextEditingController nameTextEditingController = TextEditingController();
+
   TextEditingController emailTextEditingController = TextEditingController();
+
   TextEditingController phoneTextEditingController = TextEditingController();
+
   TextEditingController passwordTextEditingController = TextEditingController();
+
+  bool isObscure = true;
 
   @override
   Widget build(BuildContext context) {
@@ -27,10 +37,10 @@ class RegisterScreen extends StatelessWidget {
           child: Column(
             children: [
               SizedBox(
-                height: 20.0,
+                height: 45.0,
               ),
               Image(
-                image: AssetImage("assets/images/logo.png"),
+                image: AssetImage("assets/images/playstore.png"),
                 width: 390.0,
                 height: 250.0,
                 alignment: Alignment.center,
@@ -40,7 +50,7 @@ class RegisterScreen extends StatelessWidget {
               ),
               Text(
                 "Register as a Driver",
-                style: TextStyle(fontSize: 24.0, fontFamily: "Brand Bold"),
+                style: TextStyle(fontSize: 24.0, fontFamily: "Brand Bold", fontWeight: FontWeight.bold),
                 textAlign: TextAlign.center,
               ),
               Padding(
@@ -56,14 +66,14 @@ class RegisterScreen extends StatelessWidget {
                       decoration: InputDecoration(
                         labelText: "Name",
                         labelStyle: TextStyle(
-                          fontSize: 14.0,
+                          fontSize: 16.0,
                         ),
                         hintStyle: TextStyle(
                           color: Colors.grey,
                           fontSize: 10.0,
                         ),
                       ),
-                      style: TextStyle(fontSize: 14.0),
+                      style: TextStyle(fontSize: 16.0),
                     ),
                     SizedBox(
                       height: 1.0,
@@ -74,14 +84,14 @@ class RegisterScreen extends StatelessWidget {
                       decoration: InputDecoration(
                         labelText: "Email",
                         labelStyle: TextStyle(
-                          fontSize: 14.0,
+                          fontSize: 16.0,
                         ),
                         hintStyle: TextStyle(
                           color: Colors.grey,
                           fontSize: 10.0,
                         ),
                       ),
-                      style: TextStyle(fontSize: 14.0),
+                      style: TextStyle(fontSize: 16.0),
                     ),
                     SizedBox(
                       height: 1.0,
@@ -92,38 +102,62 @@ class RegisterScreen extends StatelessWidget {
                       decoration: InputDecoration(
                         labelText: "Phone",
                         labelStyle: TextStyle(
-                          fontSize: 14.0,
+                          fontSize: 16.0,
                         ),
                         hintStyle: TextStyle(
                           color: Colors.grey,
                           fontSize: 10.0,
                         ),
                       ),
-                      style: TextStyle(fontSize: 14.0),
+                      style: TextStyle(fontSize: 16.0),
                     ),
                     SizedBox(
                       height: 1.0,
                     ),
                     TextField(
                       controller: passwordTextEditingController,
-                      obscureText: true,
+                      obscureText: isObscure,
                       decoration: InputDecoration(
                         labelText: "Password",
                         labelStyle: TextStyle(
-                          fontSize: 14.0,
+                          fontSize: 16.0,
                         ),
                         hintStyle: TextStyle(
                           color: Colors.grey,
                           fontSize: 10.0,
                         ),
+                        suffix: InkWell(
+                          onTap: () {
+                            setState(() {
+                              if (isObscure == false) {
+                                isObscure = true;
+                              } else {
+                                isObscure = false;
+                              }
+                            });
+                          },
+                          child: isObscure != false
+                              ? Text(
+                                  'SHOW',
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                  ),
+                                )
+                              : Text(
+                                  'HIDE',
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                  ),
+                                ),
+                        ),
                       ),
-                      style: TextStyle(fontSize: 14.0),
+                      style: TextStyle(fontSize: 16.0),
                     ),
                     SizedBox(
                       height: 20.0,
                     ),
                     RaisedButton(
-                      color: Colors.yellow,
+                      color: Colors.green,
                       textColor: Colors.white,
                       child: Container(
                         height: 50.0,
@@ -144,6 +178,10 @@ class RegisterScreen extends StatelessWidget {
                           displayToastMessage("Email address is not Valid.", context);
                         } else if (phoneTextEditingController.text.isEmpty) {
                           displayToastMessage("Phone Number is mandatory.", context);
+                        } else if (phoneTextEditingController.text.length < 11) {
+                          displayToastMessage("Phone Number must be 11 digits.", context);
+                        } else if (!phoneTextEditingController.text.startsWith('09')) {
+                          displayToastMessage("Phone Number must start with 09", context);
                         } else if (passwordTextEditingController.text.length < 6) {
                           displayToastMessage("Password must be atleast 6 Characters.", context);
                         } else {

@@ -19,6 +19,7 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   TextEditingController emailTextEditingController = TextEditingController();
   TextEditingController passwordTextEditingController = TextEditingController();
+  bool isObscure = true;
 
   @override
   Widget build(BuildContext context) {
@@ -30,11 +31,11 @@ class _LoginScreenState extends State<LoginScreen> {
           child: Column(
             children: [
               SizedBox(
-                height: 35.0,
+                height: 60.0,
               ),
               Image(
                 image: AssetImage(
-                  "assets/images/logo.png",
+                  "assets/images/playstore.png",
                 ),
                 width: 390.0,
                 height: 250.0,
@@ -45,7 +46,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               Text(
                 "Login as a Driver",
-                style: TextStyle(fontSize: 24.0, fontFamily: "Brand Bold"),
+                style: TextStyle(fontSize: 24.0, fontFamily: "Brand Bold", fontWeight: FontWeight.bold),
                 textAlign: TextAlign.center,
               ),
               Padding(
@@ -61,38 +62,62 @@ class _LoginScreenState extends State<LoginScreen> {
                       decoration: InputDecoration(
                         labelText: "Email",
                         labelStyle: TextStyle(
-                          fontSize: 14.0,
+                          fontSize: 16.0,
                         ),
                         hintStyle: TextStyle(
                           color: Colors.grey,
                           fontSize: 10.0,
                         ),
                       ),
-                      style: TextStyle(fontSize: 14.0),
+                      style: TextStyle(fontSize: 16.0),
                     ),
                     SizedBox(
                       height: 1.0,
                     ),
                     TextField(
                       controller: passwordTextEditingController,
-                      obscureText: true,
+                      obscureText: isObscure,
                       decoration: InputDecoration(
                         labelText: "Password",
                         labelStyle: TextStyle(
-                          fontSize: 14.0,
+                          fontSize: 16.0,
                         ),
                         hintStyle: TextStyle(
                           color: Colors.grey,
                           fontSize: 10.0,
                         ),
+                        suffix: InkWell(
+                          onTap: () {
+                            setState(() {
+                              if (isObscure == false) {
+                                isObscure = true;
+                              } else {
+                                isObscure = false;
+                              }
+                            });
+                          },
+                          child: isObscure != false
+                              ? Text(
+                                  'SHOW',
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                  ),
+                                )
+                              : Text(
+                                  'HIDE',
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                  ),
+                                ),
+                        ),
                       ),
-                      style: TextStyle(fontSize: 14.0),
+                      style: TextStyle(fontSize: 16.0),
                     ),
                     SizedBox(
                       height: 20.0,
                     ),
                     RaisedButton(
-                      color: Colors.yellow,
+                      color: Colors.green,
                       textColor: Colors.white,
                       child: Container(
                         height: 50.0,

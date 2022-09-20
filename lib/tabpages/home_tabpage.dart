@@ -33,7 +33,7 @@ class _HomeTabPageState extends State<HomeTabPage> {
 
   String driverStatusText = "Offline Now - Go Online ";
 
-  Color driverStatusColor = Colors.black;
+  Color driverStatusColor = Colors.black87;
 
   bool isDriverAvailable = false;
 
@@ -150,7 +150,7 @@ class _HomeTabPageState extends State<HomeTabPage> {
         Container(
           height: 140.0,
           width: double.infinity,
-          color: Colors.black87,
+          color: Colors.black54,
         ),
 
         Positioned(
@@ -182,7 +182,7 @@ class _HomeTabPageState extends State<HomeTabPage> {
                       makeDriverOfflineNow();
 
                       setState(() {
-                        driverStatusColor = Colors.black;
+                        driverStatusColor = Colors.black87;
                         driverStatusText = "Offline Now - Go Online ";
                         isDriverAvailable = false;
                       });
