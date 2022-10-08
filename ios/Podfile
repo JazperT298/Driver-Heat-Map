@@ -1,5 +1,6 @@
+use_frameworks!
 # Uncomment this line to define a global platform for your project
-# platform :ios, '9.0'
+platform :ios, '11.0'
 
 # CocoaPods analytics sends network stats synchronously affecting flutter build latency.
 ENV['COCOAPODS_DISABLE_STATS'] = 'true'
@@ -39,3 +40,8 @@ post_install do |installer|
     flutter_additional_ios_build_settings(target)
   end
 end
+
+# pod 'GeoFire', :git => 'https://github.com/mrdishant/geofire-objc', :tag => '4.3.0'
+# pod 'GeoFire', '~> 4.2'
+# pod 'GeoFire', :git => 'https://github.com/heinzan/geofire-objc'
+

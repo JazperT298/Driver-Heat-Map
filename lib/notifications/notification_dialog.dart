@@ -146,7 +146,7 @@ class NotificationDialog extends StatelessWidget {
 
   void checkAvailabilityOfRide(context) {
     rideRequestRef.once().then((DataSnapshot dataSnapShot) {
-      Navigator.pop(context);
+      // Navigator.pop(context);
       String theRideId = "";
       if (dataSnapShot.value != null) {
         theRideId = dataSnapShot.value.toString();

@@ -35,7 +35,8 @@ dependencies:
   cupertino_icons: ^1.0.2
   firebase_core: ^1.22.0
   firebase_auth: ^3.9.0
-  firebase_database: ^6.1.1
+  firebase_database: ^6.1.2
+  # firebase_database: ^9.1.4
   fluttertoast: ^8.0.3
   google_maps_flutter: ^2.2.0
   geolocator: ^7.0.1
@@ -51,6 +52,9 @@ dependencies:
   intl: ^0.17.0
   smooth_star_rating_nsafe: ^1.0.0+1
 
+  # geoflutterfire: ^3.0.3
+  # geo_firestore_flutter: ^0.1.5
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -60,7 +64,7 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^2.0.0
+  flutter_lints: ^1.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

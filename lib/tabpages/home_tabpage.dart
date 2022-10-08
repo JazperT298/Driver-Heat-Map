@@ -12,6 +12,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_geofire/flutter_geofire.dart';
+// import 'package:geo_firestore_flutter/geo_firestore_flutter.dart';
+// import 'package:geoflutterfire/geoflutterfire.dart';
+// import 'package:flutter_geofire/flutter_geofire.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
@@ -177,7 +180,7 @@ class _HomeTabPageState extends State<HomeTabPage> {
                         isDriverAvailable = true;
                       });
 
-                      displayToastMessage("you are Online Now.", context);
+                      displayToastMessage("You are Online Now.", context);
                     } else {
                       makeDriverOfflineNow();
 
@@ -187,7 +190,7 @@ class _HomeTabPageState extends State<HomeTabPage> {
                         isDriverAvailable = false;
                       });
 
-                      displayToastMessage("you are Offline Now.", context);
+                      displayToastMessage("You are Offline Now.", context);
                     }
                   },
                   color: driverStatusColor,
@@ -222,6 +225,10 @@ class _HomeTabPageState extends State<HomeTabPage> {
     currentPosition = position;
 
     Geofire.initialize("availableDrivers");
+    // GeoFirestore geoFirestore = GeoFirestore('');
+    // await geoFirestore.setLocation('tl0Lw0NUddQx5a8kXymO', GeoPoint(37.7853889, -122.4056973));
+
+    // await geoFirestore.setLocation(currentfirebaseUser!.uid, GeoPoint(currentPosition!.latitude, currentPosition!.longitude));
     Geofire.setLocation(currentfirebaseUser!.uid, currentPosition!.latitude, currentPosition!.longitude);
 
     rideRequestRef.set("searching");

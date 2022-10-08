@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>694924654528-01psr6v56vg82j3ge9076puek4irr9ik.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.694924654528-01psr6v56vg82j3ge9076puek4irr9ik</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBcuoDBCXvXRZekJ4fObuAycT07yjUFSvs</string>
+	<key>GCM_SENDER_ID</key>
+	<string>694924654528</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.driverHeatMap</string>
+	<key>PROJECT_ID</key>
+	<string>flutter-fake-taxi-309623</string>
+	<key>STORAGE_BUCKET</key>
+	<string>flutter-fake-taxi-309623.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:694924654528:ios:2ce3107119755ec9e8fa25</string>
+	<key>DATABASE_URL</key>
+	<string>https://flutter-fake-taxi-309623-default-rtdb.firebaseio.com</string>
+</dict>
+</plist>

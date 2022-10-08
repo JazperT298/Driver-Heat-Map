@@ -21,7 +21,7 @@ class _CarInfoScreenState extends State<CarInfoScreen> {
 
   TextEditingController carColorTextEditingController = TextEditingController();
 
-  List<String> carTypesList = ['Taxi', 'Motorela', 'Motorcycle'];
+  List<String> carTypesList = ['Multicab', 'Motorela'];
 
   String? selectedCarType;
   @override

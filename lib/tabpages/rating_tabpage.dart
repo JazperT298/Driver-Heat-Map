@@ -33,7 +33,7 @@ class _RatingTabPageState extends State<RatingTabPage> {
                 height: 22.0,
               ),
               Text(
-                "your's Rating",
+                "Your Ratings",
                 style: TextStyle(fontSize: 20.0, fontFamily: "Brand Bold", color: Colors.black54),
               ),
               SizedBox(
