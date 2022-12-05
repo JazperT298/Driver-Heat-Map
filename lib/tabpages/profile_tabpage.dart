@@ -1,17 +1,58 @@
 // ignore_for_file: must_be_immutable, use_key_in_widget_constructors, prefer_const_constructors, prefer_const_constructors_in_immutables, prefer_interpolation_to_compose_strings, prefer_const_literals_to_create_immutables, unused_field, prefer_final_fields, prefer_collection_literals, import_of_legacy_library_into_null_safe, unnecessary_new, avoid_unnecessary_containers, deprecated_member_use, use_build_context_synchronously, sized_box_for_whitespace, sort_child_properties_last, library_private_types_in_public_api, avoid_print
 
 import 'package:driver_heat_map/config_map.dart';
+import 'package:driver_heat_map/datahandler/app_data.dart';
 import 'package:driver_heat_map/main.dart';
+import 'package:driver_heat_map/models/history.dart';
 import 'package:driver_heat_map/screens/login_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_geofire/flutter_geofire.dart';
+import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
+import 'package:smooth_star_rating_nsafe/smooth_star_rating.dart';
 // import 'package:flutter_geofire/flutter_geofire.dart';
 
-class ProfileTabPage extends StatelessWidget {
+class ProfileTabPage extends StatefulWidget {
+  @override
+  State<ProfileTabPage> createState() => _ProfileTabPageState();
+}
+
+class _ProfileTabPageState extends State<ProfileTabPage> {
+  double starCounters = 0.0;
+
+  @override
+  void initState() {
+    super.initState();
+
+    getRatings();
+    print('now $now');
+    print('newMinus1Month $formattedDate');
+
+    print('newMinus1Month $formattedDate1');
+    print('newMinus1Day $formattedDate2');
+    print('newMinus7Day $formattedDate3');
+  }
+
+  getRatings() {
+    //update ratings
+    driversRef.child(currentfirebaseUser!.uid).child("ratings").once().then((DataSnapshot dataSnapshot) {
+      if (dataSnapshot.value != null) {
+        double ratings = double.parse(dataSnapshot.value.toString());
+        print('ratings $ratings');
+        setState(() {
+          starCounters = ratings;
+        });
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    DateTime now = DateTime.now();
+    String formattedDate = DateFormat('yyyy-MM-dd').format(now);
+    // History history = Provider.of<AppData>(context, listen: false).tripHistoryDataList[1];
     //   return Scaffold(
     //     backgroundColor: Colors.black87,
     //     body: SafeArea(
@@ -142,7 +183,7 @@ class ProfileTabPage extends StatelessWidget {
                                 backgroundColor: Colors.grey,
                                 radius: 60.0,
                                 child: CircleAvatar(
-                                  backgroundImage: AssetImage('assets/images/user_icon.png'),
+                                  backgroundImage: NetworkImage(driversInformation!.imageUrl!),
                                   radius: 59.0,
                                 ),
                               ),
@@ -194,14 +235,32 @@ class ProfileTabPage extends StatelessWidget {
                                     fontWeight: FontWeight.bold,
                                     fontFamily: 'Brand-Regular'),
                               ),
-                              Text(
-                                title + " driver",
-                                style: TextStyle(
-                                    fontSize: 16.0,
-                                    color: Colors.black,
-                                    letterSpacing: 2.5,
-                                    fontWeight: FontWeight.bold,
-                                    fontFamily: 'Brand-Regular'),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                children: [
+                                  Row(
+                                    children: [
+                                      SmoothStarRating(
+                                        rating: starCounter,
+                                        color: Colors.green,
+                                        allowHalfRating: true,
+                                        starCount: 5,
+                                        size: 15,
+                                      ),
+                                      Text(
+                                        " ($starCounter)",
+                                        style: TextStyle(fontSize: 12.0, color: Colors.black, fontFamily: 'Brand-Regular'),
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: 4,
+                                  ),
+                                  Text(
+                                    formattedDate,
+                                    style: TextStyle(fontSize: 12.0, color: Colors.black, fontFamily: 'Brand-Regular'),
+                                  ),
+                                ],
                               ),
                             ],
                           ),

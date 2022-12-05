@@ -1,11 +1,16 @@
 // ignore_for_file: must_be_immutable, use_key_in_widget_constructors, prefer_const_constructors, prefer_const_constructors_in_immutables, prefer_interpolation_to_compose_strings, prefer_const_literals_to_create_immutables, unused_field, prefer_final_fields, prefer_collection_literals, import_of_legacy_library_into_null_safe, unnecessary_new, avoid_unnecessary_containers, deprecated_member_use, use_build_context_synchronously, sized_box_for_whitespace, sort_child_properties_last
 
+import 'dart:io';
+
 import 'package:driver_heat_map/config_map.dart';
 import 'package:driver_heat_map/main.dart';
 import 'package:driver_heat_map/screens/carinfo_screen.dart';
 import 'package:driver_heat_map/screens/login_screen.dart';
 import 'package:driver_heat_map/widgets/progress_dialog.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
@@ -26,6 +31,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
   TextEditingController passwordTextEditingController = TextEditingController();
 
   bool isObscure = true;
+  File? image;
+  String filenamewholeImage = '';
+  String filenamevideoprofile = '';
+  String fileTypevideoprofile = '';
 
   @override
   Widget build(BuildContext context) {
@@ -41,8 +50,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
               ),
               Image(
                 image: AssetImage("assets/images/playstore.png"),
-                width: 390.0,
-                height: 250.0,
+                width: 160.0,
+                height: 100.0,
                 alignment: Alignment.center,
               ),
               SizedBox(
@@ -54,9 +63,48 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 textAlign: TextAlign.center,
               ),
               Padding(
-                padding: EdgeInsets.all(20.0),
+                padding: EdgeInsets.all(16.0),
                 child: Column(
                   children: [
+                    //
+                    // Align(
+                    //   alignment: Alignment.centerLeft,
+                    //   child:
+                    Row(
+                      children: [
+                        CircleAvatar(
+                          backgroundColor: Colors.grey,
+                          radius: 40.0,
+                          child: image == null
+                              ? CircleAvatar(
+                                  backgroundImage: AssetImage('assets/images/user_icon.png'),
+                                  radius: 39.0,
+                                )
+                              : CircleAvatar(
+                                  backgroundImage: FileImage(image!),
+                                  radius: 39.0,
+                                ),
+                        ),
+                        SizedBox(
+                          width: 20.0,
+                        ),
+                        RaisedButton(
+                          color: Colors.green,
+                          textColor: Colors.white,
+                          child: Text(
+                            "Choose File",
+                            style: TextStyle(fontSize: 10),
+                          ),
+                          onPressed: () {
+                            // setState(() {});
+                            getSelectedImage();
+                            // setState(() {});
+                          },
+                        ),
+                      ],
+                    ),
+                    // ),
+
                     SizedBox(
                       height: 1.0,
                     ),
@@ -172,8 +220,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         borderRadius: new BorderRadius.circular(24.0),
                       ),
                       onPressed: () {
-                        if (nameTextEditingController.text.length < 3) {
-                          displayToastMessage("name must be atleast 3 Characters.", context);
+                        //validation for register user
+                        if (image == null) {
+                          displayToastMessage("Please select image profile.", context);
+                        } else if (nameTextEditingController.text.length < 3) {
+                          displayToastMessage("Name must be atleast 3 Characters.", context);
                         } else if (!emailTextEditingController.text.contains("@")) {
                           displayToastMessage("Email address is not Valid.", context);
                         } else if (phoneTextEditingController.text.isEmpty) {
@@ -207,8 +258,31 @@ class _RegisterScreenState extends State<RegisterScreen> {
     );
   }
 
+  //select image
+  Future getSelectedImage() async {
+    final FilePickerResult? pickedFile = await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      allowedExtensions: ['jpeg', 'jpg', 'png'],
+    );
+    if (pickedFile != null) {
+      final File imgprofile = File(pickedFile.files.single.path!);
+
+      try {
+        image = imgprofile;
+        filenamewholeImage = imgprofile.path.split('/').last;
+        var splitTheimage = filenamewholeImage.split('.');
+        filenamevideoprofile = splitTheimage[0];
+        fileTypevideoprofile = splitTheimage[1];
+      } catch (e) {
+        image = null;
+      }
+      setState(() {});
+    } else {}
+  }
+
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
+  //Funaction register user to database
   void registerNewUser(BuildContext context) async {
     showDialog(
         context: context,
@@ -230,10 +304,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
     if (firebaseUser != null) //user created
     {
       //save user info to database
+      // String fileName = basename(image!.path),
+      Reference storageRef = FirebaseStorage.instance.ref().child('uploads/$filenamevideoprofile');
+      UploadTask uploadTask = storageRef.putFile(image!);
+      TaskSnapshot downloadUrl = (await uploadTask);
+      String urlString = await downloadUrl.ref.getDownloadURL();
       Map userDataMap = {
         "name": nameTextEditingController.text.trim(),
         "email": emailTextEditingController.text.trim(),
         "phone": phoneTextEditingController.text.trim(),
+        "imageUrl": urlString,
       };
 
       driversRef.child(firebaseUser.uid).set(userDataMap);

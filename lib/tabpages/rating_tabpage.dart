@@ -57,7 +57,8 @@ class _RatingTabPageState extends State<RatingTabPage> {
                 height: 14.0,
               ),
               Text(
-                title,
+                // title,
+                "($starCounter)",
                 style: TextStyle(fontSize: 55.0, fontFamily: "Signatra", color: Colors.green),
               ),
               SizedBox(

@@ -32,10 +32,15 @@ class NotificationDialog extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             SizedBox(height: 10.0),
-            Image.asset(
-              "assets/images/taxi.png",
-              width: 150.0,
-            ),
+            rideType == "Motorela"
+                ? Image.asset(
+                    "assets/images/playstore.png",
+                    width: 150.0,
+                  )
+                : Image.asset(
+                    "assets/images/multicab.png",
+                    width: 150.0,
+                  ),
             SizedBox(
               height: 0.0,
             ),

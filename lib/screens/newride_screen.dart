@@ -59,9 +59,16 @@ class _NewRideScreenState extends State<NewRideScreen> {
   void createIconMarker() {
     if (animatingMarkerIcon == null) {
       ImageConfiguration imageConfiguration = createLocalImageConfiguration(context, size: Size(2, 2));
-      BitmapDescriptor.fromAssetImage(imageConfiguration, "assets/images/car_android.png").then((value) {
-        animatingMarkerIcon = value;
-      });
+
+      if (rideType == "Motorela") {
+        BitmapDescriptor.fromAssetImage(imageConfiguration, "assets/images/playstores.jpeg").then((value) {
+          animatingMarkerIcon = value;
+        });
+      } else {
+        BitmapDescriptor.fromAssetImage(imageConfiguration, "assets/images/multicabs.png").then((value) {
+          animatingMarkerIcon = value;
+        });
+      }
     }
   }
 
@@ -403,6 +410,7 @@ class _NewRideScreenState extends State<NewRideScreen> {
     newRequestsRef.child(rideRequestId).child("status").set("accepted");
     newRequestsRef.child(rideRequestId).child("driver_name").set(driversInformation!.name);
     newRequestsRef.child(rideRequestId).child("driver_phone").set(driversInformation!.phone);
+    newRequestsRef.child(rideRequestId).child("imageUrl").set(driversInformation!.imageUrl);
     newRequestsRef.child(rideRequestId).child("driver_id").set(driversInformation!.id);
     newRequestsRef.child(rideRequestId).child("car_details").set('${driversInformation!.car_color} - ${driversInformation!.car_model}');
 

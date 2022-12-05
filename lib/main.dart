@@ -15,13 +15,15 @@ import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  //Firebase Database Initailization
   await Firebase.initializeApp();
+  //For Notification
   await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
     alert: true,
     badge: true,
     sound: true,
   );
-
+//Notification alert request permission
   await FirebaseMessaging.instance.requestPermission(
     alert: true,
     announcement: false,
@@ -31,11 +33,13 @@ void main() async {
     provisional: false,
     sound: true,
   );
+  //get couurent user
   currentfirebaseUser = FirebaseAuth.instance.currentUser;
-
+  //run this app
   runApp(MyApp());
 }
 
+//firebase database fields
 DatabaseReference usersRef = FirebaseDatabase.instance.reference().child("users");
 DatabaseReference driversRef = FirebaseDatabase.instance.reference().child("drivers");
 DatabaseReference newRequestsRef = FirebaseDatabase.instance.reference().child("Ride Requests");
@@ -53,6 +57,7 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
+        //if walay current user mo,adto sa login screen else go to home screen
         initialRoute: FirebaseAuth.instance.currentUser == null ? LoginScreen.idScreen : HomeScreen.idScreen,
         routes: {
           RegisterScreen.idScreen: (context) => RegisterScreen(),

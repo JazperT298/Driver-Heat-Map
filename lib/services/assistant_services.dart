@@ -1,4 +1,4 @@
-// ignore_for_file: import_of_legacy_library_into_null_safe
+// ignore_for_file: import_of_legacy_library_into_null_safe, avoid_print
 
 import 'package:driver_heat_map/config_map.dart';
 import 'package:driver_heat_map/datahandler/app_data.dart';
@@ -97,6 +97,70 @@ class AssistantServices {
       }
     });
   }
+
+  static void retrieveHistoryInfo1Day(context) {
+    // rideRequestRef.child(id).orderByKey().startAt(formattedDate).endAt(formattedDate1).once().then((DataSnapshot dataSnapshot) {
+    //   print('dataSnapshot ${dataSnapshot.value}');
+    //   if (dataSnapshot.value != null) {
+    //     var history = History.fromSnapshot(dataSnapshot);
+    //     Provider.of<AppData>(context, listen: false).updateTripHistoryData(history);
+    //   }
+    // });
+    var keys = Provider.of<AppData>(context, listen: false).tripHistoryKeys;
+    var now = DateTime.now();
+    var now_24 = now.subtract(const Duration(hours: 24));
+    var now_1w = now.subtract(const Duration(days: 7));
+    var now_1m = DateTime(now.year, now.month - 1, now.day);
+    var now_1y = DateTime(now.year - 1, now.month, now.day);
+
+    DateTime startDate = DateTime.now();
+    int epochTimestamp = startDate.millisecondsSinceEpoch;
+    DateTime endDate = DateTime.now();
+    var now_24s = endDate.subtract(const Duration(hours: 24));
+    print('dataSnapshot1 $now_24s');
+    int epochTimestamp2 = now_24s.millisecondsSinceEpoch;
+    print('dataSnapshot1 $epochTimestamp2');
+    var now_1ws = endDate.subtract(const Duration(days: 7));
+    print('dataSnapshot1 $now_1ws');
+    int epochTimestamp3 = now_1ws.millisecondsSinceEpoch;
+    print('dataSnapshot1 $epochTimestamp3');
+
+    // final startAtTimestamp = Timestamp.fromMillisecondsSinceEpoch(DateTime.parse('2019-03-13 16:49:42.044').millisecondsSinceEpoch);
+    var timestampssss = DateTime.now().millisecondsSinceEpoch;
+    var dateTimess = DateTime.fromMillisecondsSinceEpoch(timestampssss * 1000);
+
+    for (String key in keys) {
+      newRequestsRef
+          .child(key)
+          .orderByChild('create_at')
+          // .startAt('2022-10-10 21:26:16.968763')
+          // .endAt(formattedDate)
+          // .orderByKey()
+
+          .startAt("2022-10-15 08:56:00.032625") //DateTime.now().millisecondsSinceEpoch).
+          // .endAt([
+          //   {'create_at': DateTime.parse('2022-11-06 16:49:42.044')}
+          // ])
+          // .startAt(epochTimestamp)
+          // .endAt(epochTimestamp3)
+          .once()
+          //     .onChildAdded
+          //     .listen((event) {
+          //   print('dataSnapshot1 ${event.snapshot.value}');
+          // });
+          .then((DataSnapshot snapshot) {
+        // newRequestsRef.child(key).orderByKey().startAt(timestamp1day).endAt(timestamp).once().then((DataSnapshot snapshot) {
+        print('dataSnapshot1 ${snapshot.value}');
+        if (snapshot.value != null) {
+          var history = History.fromSnapshot(snapshot);
+          Provider.of<AppData>(context, listen: false).updateTripHistoryData(history);
+        }
+      });
+    }
+  }
+
+  static void retrieveHistoryInfo7Day() {}
+  static void retrieveHistoryInfo1Month() {}
 
   static void obtainTripRequestsHistoryData(context) {
     var keys = Provider.of<AppData>(context, listen: false).tripHistoryKeys;

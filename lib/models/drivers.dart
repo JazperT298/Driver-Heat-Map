@@ -6,6 +6,7 @@ class Drivers {
   String? name;
   String? phone;
   String? email;
+  String? imageUrl;
   String? id;
   String? car_color;
   String? car_model;
@@ -15,6 +16,7 @@ class Drivers {
     this.name,
     this.phone,
     this.email,
+    this.imageUrl,
     this.id,
     this.car_color,
     this.car_model,
@@ -26,6 +28,7 @@ class Drivers {
     phone = dataSnapshot.value["phone"];
     email = dataSnapshot.value["email"];
     name = dataSnapshot.value["name"];
+    imageUrl = dataSnapshot.value["imageUrl"];
     car_color = dataSnapshot.value["car_details"]["car_color"];
     car_model = dataSnapshot.value["car_details"]["car_model"];
     car_number = dataSnapshot.value["car_details"]["car_number"];
